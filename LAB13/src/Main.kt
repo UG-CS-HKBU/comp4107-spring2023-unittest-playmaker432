@@ -101,9 +101,11 @@ abstract class Hero(var role: Role) : Role by role {
     }
 
     open fun beingAttacked() {
-        println("$name got attached")
+        println("$name got attacked")
         if (!dodgeAttack()) {
-            hp--
+            if(hp > 0){
+                hp--
+            }
             println("$name is unable to dodge attack, current hp is $hp.")
         } else {
             println("$name dodged attack, current hp is $hp.")
@@ -113,6 +115,7 @@ abstract class Hero(var role: Role) : Role by role {
 
 abstract class MonarchHero(role: Role) : Hero(role) {
     override val maxHP = 5
+    override var hp = 5
 }
 
 interface Handler {
@@ -149,10 +152,12 @@ abstract class WeiHero(role: Role) : Hero(role), Handler {
 
 abstract class WarriorHero(role: Role) : Hero(role) {
     override val maxHP = 4
+    override var hp = 4
 }
 
 abstract class AdvisorHero(role: Role) : Hero(role) {
     override val maxHP = 3
+    override var hp = 3
 }
 
 class LiuBei : MonarchHero(MonarchRole()) {
